@@ -29,6 +29,22 @@ class PlaySoundsViewController: UIViewController {
         case slow = 0, fast, lowPitch, highPitch, reverb, echo
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        slowButton?.imageView?.contentMode = .scaleAspectFit
+        fastButton?.imageView?.contentMode = .scaleAspectFit
+        lowPitchButton?.imageView?.contentMode = .scaleAspectFit
+        highPitchButton?.imageView?.contentMode = .scaleAspectFit
+        reverbButton?.imageView?.contentMode = .scaleAspectFit
+        echoButton?.imageView?.contentMode = .scaleAspectFit
+        setupAudio()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureUI(.notPlaying)
+    }
+    
     @IBAction func playSoundsButtonPressed(_ sender: UIButton) {
         switch(ButtonType(rawValue: sender.tag)!){
         case .slow:
@@ -47,18 +63,7 @@ class PlaySoundsViewController: UIViewController {
         configureUI(.playing)
     }
     
-    
     @IBAction func stopButtonPressed(_ sender: Any) {
         stopAudio()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupAudio()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        configureUI(.notPlaying)
-    }
-
 }
